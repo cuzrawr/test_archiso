@@ -1,0 +1,171 @@
+{
+    "additional-repositories": [],
+    "archinstall-language": "English",
+    "audio_config": {
+        "audio": "pipewire"
+    },
+    "bootloader": "Systemd-boot",
+    "config_version": "2.7.1",
+    "debug": false,
+    "disk_config": {
+        "config_type": "manual_partitioning",
+        "device_modifications": [
+            {
+                "device": "/dev/sda",
+                "partitions": [
+                    {
+                        "btrfs": [],
+                        "dev_path": null,
+                        "flags": [
+                            "Boot",
+                            "ESP"
+                        ],
+                        "fs_type": "fat32",
+                        "mount_options": [],
+                        "mountpoint": "/boot",
+                        "obj_id": "1c233a70-7f3c-4b28-b6bf-9265fa01118a",
+                        "size": {
+                            "sector_size": {
+                                "unit": "B",
+                                "value": 512
+                            },
+                            "unit": "MiB",
+                            "value": 203
+                        },
+                        "start": {
+                            "sector_size": {
+                                "unit": "B",
+                                "value": 512
+                            },
+                            "unit": "MiB",
+                            "value": 1
+                        },
+                        "status": "create",
+                        "type": "primary"
+                    },
+                    {
+                        "btrfs": [
+                            {
+                                "compress": true,
+                                "mountpoint": "/",
+                                "name": "@",
+                                "nodatacow": false
+                            },
+                            {
+                                "compress": true,
+                                "mountpoint": "/home",
+                                "name": "@home",
+                                "nodatacow": false
+                            },
+                            {
+                                "compress": true,
+                                "mountpoint": "/var/log",
+                                "name": "@log",
+                                "nodatacow": false
+                            },
+                            {
+                                "compress": false,
+                                "mountpoint": "/.snapshots",
+                                "name": "@.snapshots",
+                                "nodatacow": true
+                            },
+                            {
+                                "compress": true,
+                                "mountpoint": "/var/cache/pacman/pkg",
+                                "name": "@pkg",
+                                "nodatacow": false
+                            }
+                        ],
+                        "dev_path": null,
+                        "flags": [],
+                        "fs_type": "btrfs",
+                        "mount_options": [
+                            "compress=zstd"
+                        ],
+                        "mountpoint": null,
+                        "obj_id": "95b57b0a-ca5c-416a-89ef-2c6c43bb64fa",
+                        "size": {
+                            "sector_size": {
+                                "unit": "B",
+                                "value": 512
+                            },
+                            "unit": "B",
+                            "value": 3972005888
+                        },
+                        "start": {
+                            "sector_size": {
+                                "unit": "B",
+                                "value": 512
+                            },
+                            "unit": "B",
+                            "value": 213909504
+                        },
+                        "status": "create",
+                        "type": "primary"
+                    }
+                ],
+                "wipe": true
+            }
+        ]
+    },
+    "hostname": "hostname",
+    "kernels": [
+        "linux"
+    ],
+    "locale_config": {
+        "kb_layout": "us",
+        "sys_enc": "UTF-8",
+        "sys_lang": "en_US"
+    },
+    "mirror_config": {
+        "custom_mirrors": [
+            {
+                "name": "localrepo",
+                "sign_check": "Never",
+                "sign_option": "TrustAll",
+                "url": "file:///localrepo"
+            }
+        ],
+        "mirror_regions": {}
+    },
+    "network_config": {
+        "type": "nm"
+    },
+    "no_pkg_lookups": false,
+    "ntp": true,
+    "offline": true,
+    "packages": [
+        "firefox",
+        "firefox-ublock-origin"
+    ],
+    "parallel downloads": 4,
+    "profile_config": {
+        "gfx_driver": "All open-source",
+        "greeter": "sddm",
+        "profile": {
+            "custom_settings": {
+                "Kde": {}
+            },
+            "details": [
+                "Kde"
+            ],
+            "main": "Desktop"
+        }
+    },
+    "script": "guided",
+    "silent": true,
+    "skip_ntp": false,
+    "skip_version_check": true,
+    "swap": false,
+    "timezone": "UTC",
+    "uki": false,
+    "version": "2.7.1",
+/*    "custom-commands": [
+        "sudo pacman -Scvv --noconfirm",
+        "echo test after custom command1",
+        "ls /var/cache/pacman/pkg | wc -l",
+        "echo test after custom command2",
+        "yes | pacman -Scc",
+        "ls /var/cache/pacman/pkg | wc -l"
+    ]*/
+}
