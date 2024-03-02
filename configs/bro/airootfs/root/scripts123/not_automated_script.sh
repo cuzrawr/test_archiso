@@ -11,6 +11,11 @@ sed -i '/import archinstall/a from archinstall import SysCommand' /usr/lib/pytho
 
 sed -i.bak '/# Set mirrors used by pacstrap/i\		# custom sets pacman PKGS to memdisk, for low HD space installs.\n		SysCommand(f'\''mount --rbind /localrepo /mnt/archinstall/var/cache/pacman/pkg/'\'')' /usr/lib/python3.11/site-packages/archinstall/scripts/guided.py
 
+sudo systemctl stop archlinux-keyring-wkd-sync.timer
+sudo systemctl disable archlinux-keyring-wkd-sync.timer
+sudo systemctl stop reflector.service
+sudo systemctl disable reflector.service
+
 
 # sed -i.bak '/# Set mirrors used by pacstrap/i\		# custom sets pacman PKGS to memdisk, for low HD space installs.\n		SysCommand(f'\''mount --rbind /var/lib/pacman/sync /mnt/archinstall/var/lib/pacman/sync/'\'')' /usr/lib/python3.11/site-packages/archinstall/scripts/guided.py
 
@@ -49,6 +54,11 @@ fi
 
 # archinstall  --offline  --skip-version-check  --config /root/scripts123/user_configuration.json --creds /root/scripts123/user_credentials.json
 
+
+sudo systemctl stop archlinux-keyring-wkd-sync.timer
+sudo systemctl disable archlinux-keyring-wkd-sync.timer
+sudo systemctl stop reflector.service
+sudo systemctl disable reflector.service
 
 archinstall --config /root/scripts123/user_configuration.json --creds /root/scripts123/user_credentials.json --silent --skip-ntp --offline --skip-version-check --no-pkg-lookups
 
