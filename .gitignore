@@ -18,3 +18,6 @@ out_dir/
 localrepo.db.tar.gz
 *.db.tar.gz
 *.sig
+*.db
+*.files
+*.files.tar.gz
