@@ -15,3 +15,6 @@ man/version.rst
 *.tar.zst
 work_dir/
 out_dir/
+localrepo.db.tar.gz
+*.db.tar.gz
+*.sig
