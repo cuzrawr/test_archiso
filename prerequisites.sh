@@ -22,4 +22,4 @@ sudo pacman --noconfirm -Syw --cachedir configs/bro/airootfs/localrepo --dbpath 
 
 #
 
-sudo repo-add configs/bro/airootfs/localrepo/localrepo.db.tar.gz configs/bro/airootfs/localrepo/*[^sig]
+sudo repo-add configs/bro/airootfs/localrepo/localrepo.db.tar.gz configs/bro/airootfs/localrepo/*.tar.zst
