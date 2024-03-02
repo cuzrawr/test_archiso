@@ -57,9 +57,10 @@ CMD_BASE="archinstall --config /root/scripts123/user_configuration.json --creds 
 CHOICE=$(dialog --clear --backtitle "Pseudo automatic Archinstall Menu" \
                 --title "Choose Installation Mode" \
                 --menu "Select an option:" 15 50 4 \
-                "1" "Automatic Silent" \
-                "2" "Semi-Automatic Not Silent" \
-                "3" "Custom options passed to archinstall script" \
+                "1" "Automatic Silent offline" \
+                "2" "Semi-Automatic Not Silent offline" \
+                "3" "online" \
+                "4" "Custom options passed to archinstall script" \
                 2>&1 >/dev/tty)
 
 # Clear dialog artifacts
@@ -68,14 +69,18 @@ clear
 # Handle the user choice
 case $CHOICE in
     1)
-        # Option 1: Automatic Silent
+        # Option 1: Automatic Silent offline
         eval "$CMD_BASE --silent --skip-ntp --offline --skip-version-check --no-pkg-lookups"
         ;;
     2)
-        # Option 2: Automatic Not Silent
+        # Option 2: Semi Automatic Not Silent offline
         eval "$CMD_BASE --skip-ntp --offline --skip-version-check --no-pkg-lookups"
         ;;
     3)
+        # Option 3: online
+        eval "$CMD_BASE "
+        ;;
+    4)
         # Option 3: Custom
         # Prompt user for additional commands
         read -p "Enter your additional command options: " CUSTOM_OPTS

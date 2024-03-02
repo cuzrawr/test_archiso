@@ -1,23 +1,18 @@
-# Variables
-MKARCHISO = sudo ./archiso/mkarchiso
-WORK_DIR = work_dir
-OUT_DIR = out_dir
-CONFIG_DIR = configs/bro
+# Makefile
 
-# Default target
-.PHONY: all
-all: $(WORK_DIR) $(OUT_DIR)
-    $(MKARCHISO) -w $(WORK_DIR) -o $(OUT_DIR) -m iso -v $(CONFIG_DIR)
+all: clean create_dirs build_iso
 
-# Rule to create the work directory
-$(WORK_DIR):
-    mkdir -p $(WORK_DIR)
+create_dirs:
+    @echo "Creating directories..".
+    sudo mkdir -p work_dir out_dir
 
-# Rule to create the output directory
-$(OUT_DIR):
-    mkdir -p $(OUT_DIR)
+build_iso:
+    @echo "Building ISO..".
+    sudo ./archiso/mkarchiso -w work_dir -o out_dir -m iso -v configs/bro/
 
-# Clean rule
-.PHONY: clean
 clean:
-    rm -rf $(WORK_DIR) $(OUT_DIR)
+    @echo "Cleaning work_dir and out_dir..".
+    sudo rm -rf work_dir out_dir
+    @echo "Cleanup complete".
+
+.PHONY: all create_dirs build_iso clean

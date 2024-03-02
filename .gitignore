@@ -13,3 +13,5 @@ meta-data
 man/version.rst
 *.tar.zst.sig
 *.tar.zst
+work_dir/
+out_dir/
