@@ -11,3 +11,5 @@ out/
 user-data
 meta-data
 man/version.rst
+*.tar.zst.sig
+*.tar.zst
