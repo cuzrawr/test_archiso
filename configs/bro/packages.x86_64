@@ -6,9 +6,11 @@ b43-fwcutter
 base
 bcachefs-tools
 bind
+bolt
 brltty
 broadcom-wl
 btrfs-progs
+clonezilla
 cloud-init
 cryptsetup
 darkhttpd
@@ -60,6 +62,7 @@ lynx
 man-db
 man-pages
 mc
+mdadm
 memtest86+
 memtest86+-efi
 mkinitcpio
@@ -80,10 +83,13 @@ open-vm-tools
 openconnect
 openpgp-card-tools
 openssh
+openvpn
 partclone
 parted
 partimage
 pcsclite
+ppp
+pptpclient
 pv
 qemu-guest-agent
 refind
@@ -123,3 +129,4 @@ wvdial
 xfsprogs
 xl2tpd
 zsh
+the_silver_searcher
