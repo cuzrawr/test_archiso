@@ -123,7 +123,7 @@
                 "name": "localrepo",
                 "sign_check": "Never",
                 "sign_option": "TrustAll",
-                "url": "file:///var/cache/pacman/pkg"
+                "url": "file:///localrepo"
             }
         ],
         "mirror_regions": {}

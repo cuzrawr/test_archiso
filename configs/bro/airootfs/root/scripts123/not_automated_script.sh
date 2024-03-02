@@ -9,10 +9,10 @@ sed -i '/import archinstall/a from archinstall import SysCommand' /usr/lib/pytho
 
 # sed -i.bak '/# Set mirrors used by pacstrap/i\		# custom sets pacman PKGS to memdisk, for low HD space installs.\n		SysCommand(f'\''mount -t tmpfs -o size=99% tmpfs /mnt/archinstall/var/cache/pacman/pkg'\'')' /usr/lib/python3.11/site-packages/archinstall/scripts/guided.py
 
-sed -i.bak '/# Set mirrors used by pacstrap/i\		# custom sets pacman PKGS to memdisk, for low HD space installs.\n		SysCommand(f'\''mount --rbind /var/cache/pacman/pkg /mnt/archinstall/var/cache/pacman/pkg/'\'')' /usr/lib/python3.11/site-packages/archinstall/scripts/guided.py
+sed -i.bak '/# Set mirrors used by pacstrap/i\		# custom sets pacman PKGS to memdisk, for low HD space installs.\n		SysCommand(f'\''mount --rbind /localrepo /mnt/archinstall/var/cache/pacman/pkg/'\'')' /usr/lib/python3.11/site-packages/archinstall/scripts/guided.py
 
 
-sed -i.bak '/# Set mirrors used by pacstrap/i\		# custom sets pacman PKGS to memdisk, for low HD space installs.\n		SysCommand(f'\''mount --rbind /var/lib/pacman/sync /mnt/archinstall/var/lib/pacman/sync/'\'')' /usr/lib/python3.11/site-packages/archinstall/scripts/guided.py
+# sed -i.bak '/# Set mirrors used by pacstrap/i\		# custom sets pacman PKGS to memdisk, for low HD space installs.\n		SysCommand(f'\''mount --rbind /var/lib/pacman/sync /mnt/archinstall/var/lib/pacman/sync/'\'')' /usr/lib/python3.11/site-packages/archinstall/scripts/guided.py
 
 
 
@@ -25,7 +25,7 @@ sed -i.bak '/# Set mirrors used by pacstrap/i\		# custom sets pacman PKGS to mem
 
 #############################
 if ! grep -qF '[localrepo]' /etc/pacman.conf; then
-    sed -i '/#\s*\[core-testing\]/i [localrepo]\nSigLevel = Optional TrustAll\nServer = file:///var/cache/pacman/pkg\n' /etc/pacman.conf
+    sed -i '/#\s*\[core-testing\]/i [localrepo]\nSigLevel = Optional TrustAll\nServer = file:///localrepo\n' /etc/pacman.conf
     #
     # sed -i 's/#IgnoreGroup =/IgnoreGroup = base-devel/' /etc/pacman.conf
     # sed -i '/#NoExtract   =$/i\NoExtract=usr/share/doc/* usr/share/doc/'  /etc/pacman.conf
@@ -50,47 +50,49 @@ fi
 # archinstall  --offline  --skip-version-check  --config /root/scripts123/user_configuration.json --creds /root/scripts123/user_credentials.json
 
 
-# Define the command base
-CMD_BASE="archinstall --config /root/scripts123/user_configuration.json --creds /root/scripts123/user_credentials.json"
+archinstall --config /root/scripts123/user_configuration.json --creds /root/scripts123/user_credentials.json --silent --skip-ntp --offline --skip-version-check --no-pkg-lookups
 
-# Display the menu and get the user choice
-CHOICE=$(dialog --clear --backtitle "Pseudo automatic Archinstall Menu" \
-                --title "Choose Installation Mode" \
-                --menu "Select an option:" 15 50 4 \
-                "1" "Automatic Silent offline" \
-                "2" "Semi-Automatic Not Silent offline" \
-                "3" "online" \
-                "4" "Custom options passed to archinstall script" \
-                2>&1 >/dev/tty)
+# # Define the command base
+# CMD_BASE="archinstall --config /root/scripts123/user_configuration.json --creds /root/scripts123/user_credentials.json"
 
-# Clear dialog artifacts
-clear
+# # Display the menu and get the user choice
+# CHOICE=$(dialog --clear --backtitle "Pseudo automatic Archinstall Menu" \
+#                 --title "Choose Installation Mode" \
+#                 --menu "Select an option:" 15 50 4 \
+#                 "1" "Automatic Silent offline" \
+#                 "2" "Semi-Automatic Not Silent offline" \
+#                 "3" "online" \
+#                 "4" "Custom options passed to archinstall script" \
+#                 2>&1 >/dev/tty)
 
-# Handle the user choice
-case $CHOICE in
-    1)
-        # Option 1: Automatic Silent offline
-        eval "$CMD_BASE --silent --skip-ntp --offline --skip-version-check --no-pkg-lookups"
-        ;;
-    2)
-        # Option 2: Semi Automatic Not Silent offline
-        eval "$CMD_BASE --skip-ntp --offline --skip-version-check --no-pkg-lookups"
-        ;;
-    3)
-        # Option 3: online
-        eval "$CMD_BASE "
-        ;;
-    4)
-        # Option 3: Custom
-        # Prompt user for additional commands
-        read -p "Enter your additional command options: " CUSTOM_OPTS
-        # Combine base command with user input and execute
-        eval "$CMD_BASE $CUSTOM_OPTS"
-        ;;
-    *)
-        echo "No valid option selected or cancelled. Exiting".
-        ;;
-esac
+# # Clear dialog artifacts
+# clear
+
+# # Handle the user choice
+# case $CHOICE in
+#     1)
+#         # Option 1: Automatic Silent offline
+#         eval "$CMD_BASE --silent --skip-ntp --offline --skip-version-check --no-pkg-lookups"
+#         ;;
+#     2)
+#         # Option 2: Semi Automatic Not Silent offline
+#         eval "$CMD_BASE --skip-ntp --offline --skip-version-check --no-pkg-lookups"
+#         ;;
+#     3)
+#         # Option 3: online
+#         eval "$CMD_BASE "
+#         ;;
+#     4)
+#         # Option 3: Custom
+#         # Prompt user for additional commands
+#         read -p "Enter your additional command options: " CUSTOM_OPTS
+#         # Combine base command with user input and execute
+#         eval "$CMD_BASE $CUSTOM_OPTS"
+#         ;;
+#     *)
+#         echo "No valid option selected or cancelled. Exiting".
+#         ;;
+# esac
 
 
 

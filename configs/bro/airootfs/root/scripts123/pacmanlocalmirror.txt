@@ -1,6 +1,6 @@
 
 [localrepo]
 SigLevel = Optional TrustAll
-Server = file:///var/cache/pacman/pkg
+Server = file:///localrepo
 
 
