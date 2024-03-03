@@ -21,3 +21,5 @@ localrepo.db.tar.gz
 *.db
 *.files
 *.files.tar.gz
+localrepo.files.tar.gz
+*.pkg.tar.xz

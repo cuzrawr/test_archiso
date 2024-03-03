@@ -16,6 +16,12 @@ echo Doing stuff inside chroot...
 #pacman -S hunspell-en_us hunspell-de mpv libreoffice-fresh --noconfirm
 
 
+
+
+# fixing mirrorlist
+
+sed -i '/localrepo/d' /etc/pacman.d/mirrorlist
+
 rm /do_this_inside_chroot.sh
 
 echo Exiting chroot ...
