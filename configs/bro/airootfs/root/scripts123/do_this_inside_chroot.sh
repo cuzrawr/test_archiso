@@ -1,16 +1,5 @@
 echo Doing stuff inside chroot...
 
-# clean sys
-pacman -Rdduns  base-devel gcc smbclient vim vim-runtime man-pages --noconfirm
-
-# try to install libreoffice
-pacman -S hunspell-en_us hunspell-de libreoffice-fresh --noconfirm
-
-
-
-echo "clean cache"
-yes | pacman -Scc
-
 
 
 # fixing fstab
@@ -30,11 +19,25 @@ echo "tmpfs  /var/cache/pacman/pkg    tmpfs    defaults,size=50%    0  0" | sudo
 
 
 
+
 # fixing mirrorlist
 
 sed -i '/localrepo/d' /etc/pacman.d/mirrorlist
 
 rm /do_this_inside_chroot.sh
+
+
+
+
+# clean sys
+pacman -Rdduns  base-devel gcc smbclient vim vim-runtime man-pages --noconfirm
+
+
+echo "clean cache"
+yes | pacman -Scc
+
+
+
 
 echo Exiting chroot ...
 

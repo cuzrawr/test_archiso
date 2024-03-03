@@ -17,6 +17,7 @@ default        = online guided + custom input.\n
 \n\n
 
 WARNING:
+/dev/sda is hardcoded in offline\n
 DEFAULT USER IS  username  WITH PASSWORD  123 \n
 AND ROOT USER IS  root  WITH PASSWORD  123 \n\n"
 

@@ -1,45 +1,46 @@
 # Offline Arch Project
 
-The **Offline Arch Project** aims to provide a streamlined installation process tailored for compatibility with 4GB HD disks, with a focus on offline installation capabilities. The project utilizes customized presets for `archinstall` and is currently implemented in the Bash scripting language. Due to time constraints, a full rewrite in Python is not feasible at this juncture.
+The **Offline Arch Project** streamlines installation for 4GB HD disks, focusing on offline capabilities. Using customized presets in Bash, it supports `archinstall` but cannot be rewritten in Python due to time constraints.
 
 ## Features
 
-- **Disk Compatibility**: Specifically designed to accommodate 4GB HD disks.
-- **Offline Installation**: Facilitates installation without requiring an internet connection.
-- **Customized Presets**: Utilizes tailored presets for `archinstall`.
-- **Desktop Environment**: KDE is set as the default desktop environment, chosen for its robust Wayland support and user-friendly interface.
-- **Automated Installation**: Supports automated installation with a single button press.
+- **Disk Compatibility**: Tailored for 4GB HD disks.
+- **Offline Installation**: Supports installation without internet.
+- **Customized Presets**: Uses tailored presets for `archinstall`.
+- **Desktop Environment**: Default desktop environment is KDE for Wayland support and user-friendliness.
+- **Automated Installation**: Supports one-button press installation.
+
 - **User Credentials**:
   - Default User: Username - "username", Password - "123"
   - Root User: Username - "root", Password - "123"
 
+  - Default disk: /dev/sda with the option to change in user_configuration.json or guided install.
+
 ## Implementation Details
 
-All script logic is contained within `.sh` files located in the `<airootfs>/root/scripts123/` directory. Additionally, a `/localrepo` directory is required within `airootfs`, which will be automatically created for Archiso on your actual system at `/localrepo`.
+Script logic is in `.sh` files in `<airootfs>/root/scripts123/`. An `/localrepo` directory is needed in `airootfs`, automatically created in Archiso at `/localrepo`.
 
 ## Usage Instructions
 
-To compile the script, follow these steps:
+To compile the script:
 
-1. Review the `prerequisites.sh` file.
-2. Create your own offline repository.
-3. Once completed, simply run the `make` command to generate the ISO in the `out_dir` folder upon successful completion.
+1. Review `prerequisites.sh`.
+2. Create an offline repository.
+3. Run the `make` command to generate the ISO in the `out_dir` folder upon completion.
 
 ## Prerequisites
-
-Ensure the following prerequisites are met before compiling the script:
 
 - Review and configure settings in `prerequisites.sh`.
 - Create an offline repository.
 
-## Instructions for Use
+## Instructions
 
 1. Clone the repository.
-2. Review and configure settings as necessary.
-3. Compile the script using the provided instructions.
-4. Upon successful compilation, execute the generated ISO for installation.
+2. Review and configure settings.
+3. Compile the script.
+4. Execute the generated ISO for installation.
 
-**Note:** Ensure proper caution and understanding before executing commands, as they may lead to system changes.
+**Note:** Use caution when executing commands as they may alter the system.
 
 ---
 This project is licensed under [I DONT CAREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE USE AS YOU WANT](#).
