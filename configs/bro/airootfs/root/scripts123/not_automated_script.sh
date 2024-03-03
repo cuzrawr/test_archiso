@@ -11,11 +11,25 @@ sed -i '/import archinstall/a from archinstall import SysCommand' /usr/lib/pytho
 
 sed -i.bak '/# Set mirrors used by pacstrap/i\		# custom sets pacman PKGS to memdisk, for low HD space installs.\n		SysCommand(f'\''mount --rbind /localrepo /mnt/archinstall/var/cache/pacman/pkg/'\'')' /usr/lib/python3.11/site-packages/archinstall/scripts/guided.py
 
-sudo systemctl stop archlinux-keyring-wkd-sync.timer
-sudo systemctl disable archlinux-keyring-wkd-sync.timer
-sudo systemctl stop reflector.service
-sudo systemctl disable reflector.service
 
+systemctl stop archlinux-keyring-wkd-sync.timer
+systemctl disable archlinux-keyring-wkd-sync.timer
+systemctl stop reflector.service
+systemctl disable reflector.service
+#
+systemctl stop systemd-networkd-wait-online.service
+systemctl disable systemd-networkd-wait-online.service
+#
+systemctl stop systemd-networkd.service
+systemctl disable systemd-networkd.service
+#
+systemctl stop systemd-time-wait-sync.service
+systemctl disable systemd-time-wait-sync.service
+#
+systemctl stop timesyncd.service
+systemctl disable timesyncd.service
+#
+systemctl daemon-reload
 
 # sed -i.bak '/# Set mirrors used by pacstrap/i\		# custom sets pacman PKGS to memdisk, for low HD space installs.\n		SysCommand(f'\''mount --rbind /var/lib/pacman/sync /mnt/archinstall/var/lib/pacman/sync/'\'')' /usr/lib/python3.11/site-packages/archinstall/scripts/guided.py
 
@@ -42,23 +56,55 @@ if ! grep -qF '[localrepo]' /etc/pacman.conf; then
     # sed -i '/#NoExtract   =$/i\NoExtract=*LICENSE*'  /etc/pacman.conf
 
 
+    # disable core repo
+    sed -i "/\[core\]/,/Include/"'s/^/#/' /etc/pacman.conf
+
+    # disable extra repo
+    sed -i "/\[extra\]/,/Include/"'s/^/#/' /etc/pacman.conf
+
+    # wait reflector fto finish
     printf '%s: waiting for reflector\n' "$0"
      while       [ "$(systemctl is-active reflector.service)" != "inactive" ] &&       [ "$(systemctl is-active reflector.service)" != "failed" ]; do     sleep 1; done
 
+    #remove reflector from the system (its offline install part so we just trust this )
+    #rm $(which reflector)
+    echo "test" > $(which reflector)
 
+    #remove reflector from the system
+    #rm $(which reflector)
+
+    #
+    # add our localrepo to top of mirrorlist so its used first
     sed -i '1iServer = file:///localrepo' /etc/pacman.d/mirrorlist
 
 fi
 
 
-
 # archinstall  --offline  --skip-version-check  --config /root/scripts123/user_configuration.json --creds /root/scripts123/user_credentials.json
 
 
-sudo systemctl stop archlinux-keyring-wkd-sync.timer
-sudo systemctl disable archlinux-keyring-wkd-sync.timer
-sudo systemctl stop reflector.service
-sudo systemctl disable reflector.service
+systemctl stop archlinux-keyring-wkd-sync.timer
+systemctl disable archlinux-keyring-wkd-sync.timer
+systemctl stop reflector.service
+systemctl disable reflector.service
+#
+systemctl stop systemd-networkd-wait-online.service
+systemctl disable systemd-networkd-wait-online.service
+#
+systemctl stop systemd-networkd.service
+systemctl disable systemd-networkd.service
+#
+systemctl stop systemd-time-wait-sync.service
+systemctl disable systemd-time-wait-sync.service
+#
+systemctl stop timesyncd.service
+systemctl disable timesyncd.service
+#
+systemctl daemon-reload
+
+echo "Using archinstall with this cmdline: "
+echo " archinstall --config /root/scripts123/user_configuration.json --creds /root/scripts123/user_credentials.json --silent --skip-ntp --offline --skip-version-check --no-pkg-lookups "
+
 
 archinstall --config /root/scripts123/user_configuration.json --creds /root/scripts123/user_credentials.json --silent --skip-ntp --offline --skip-version-check --no-pkg-lookups
 
@@ -112,9 +158,6 @@ archinstall --config /root/scripts123/user_configuration.json --creds /root/scri
 cp /root/scripts123/do_this_inside_chroot.sh /mnt/archinstall/do_this_inside_chroot.sh
 
 chroot /mnt/archinstall bash /do_this_inside_chroot.sh
-
-
-
 
 echo ' INSTALL COMPLETED.   '
 echo ' REBOOT IN 10 SECONDS, PRESS  ctrl + c  TO CANCEL IF REQUIRED '

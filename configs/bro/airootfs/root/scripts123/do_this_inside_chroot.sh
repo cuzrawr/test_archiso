@@ -10,6 +10,7 @@ echo "portal              	/run/user/1000/doc	fuse.portal	rw,nosuid,nodev,user_i
 
 
 pacman -R gcc --noconfirm
+pacman -Rdduns  base-devel smbclient vim vim-runtime man-pages --noconfirm
 
 
 pacman -S hunspell-en_us hunspell-de mpv libreoffice-fresh --noconfirm
