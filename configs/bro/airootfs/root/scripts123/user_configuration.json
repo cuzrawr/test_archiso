@@ -117,17 +117,6 @@
         "sys_enc": "UTF-8",
         "sys_lang": "en_US"
     },
-    "mirror_config": {
-        "custom_mirrors": [
-            {
-                "name": "localrepo",
-                "sign_check": "Never",
-                "sign_option": "TrustAll",
-                "url": "file:///localrepo"
-            }
-        ],
-        "mirror_regions": {}
-    },
     "network_config": {
         "type": "nm"
     },
@@ -159,21 +148,5 @@
     "swap": false,
     "timezone": "UTC",
     "uki": false,
-    "version": "2.7.1",
-    "custom-commands": [
-        "echo backup current .db of pacman",
-        "mkdir -p /tmp/test234",
-        "cp /var/lib/pacman/sync/*.db /tmp/test234/",
-        "umount /var/lib/pacman/sync/",
-        "cp /tmp/test234/*.db /var/lib/pacman/sync/",
-        "echo db backup ok, testing features:",
-        "echo -------------------------------------",
-        "sudo pacman -Scvv --noconfirm",
-        "echo test after custom command1",
-        "ls /var/cache/pacman/pkg | wc -l",
-        "echo test after custom command2",
-        "yes | pacman -Scc",
-        "ls /var/cache/pacman/pkg | wc -l",
-        "echo -------------------------------------"
-    ]
+    "version": "2.7.1"
 }

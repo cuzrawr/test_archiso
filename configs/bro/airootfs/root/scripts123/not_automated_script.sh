@@ -9,27 +9,34 @@ sed -i '/import archinstall/a from archinstall import SysCommand' /usr/lib/pytho
 
 # sed -i.bak '/# Set mirrors used by pacstrap/i\		# custom sets pacman PKGS to memdisk, for low HD space installs.\n		SysCommand(f'\''mount -t tmpfs -o size=99% tmpfs /mnt/archinstall/var/cache/pacman/pkg'\'')' /usr/lib/python3.11/site-packages/archinstall/scripts/guided.py
 
+
+# hack to low hd isntall
 sed -i.bak '/# Set mirrors used by pacstrap/i\		# custom sets pacman PKGS to memdisk, for low HD space installs.\n		SysCommand(f'\''mount --rbind /localrepo /mnt/archinstall/var/cache/pacman/pkg/'\'')' /usr/lib/python3.11/site-packages/archinstall/scripts/guided.py
 
+# works by breaking while loops (there bug with key generation stuck )
+sed -i 's/time\.sleep(1)/time.sleep(5); break/g' /usr/lib/python3.11/site-packages/archinstall/lib/installer.py
 
-systemctl stop archlinux-keyring-wkd-sync.timer
-systemctl disable archlinux-keyring-wkd-sync.timer
-systemctl stop reflector.service
-systemctl disable reflector.service
+
 #
-systemctl stop systemd-networkd-wait-online.service
-systemctl disable systemd-networkd-wait-online.service
+systemctl --quiet stop archlinux-keyring-wkd-sync.timer
+systemctl --quiet disable archlinux-keyring-wkd-sync.timer
+systemctl --quiet stop reflector.service
+systemctl --quiet disable reflector.service
 #
-systemctl stop systemd-networkd.service
-systemctl disable systemd-networkd.service
+systemctl --quiet stop systemd-networkd-wait-online.service
+systemctl --quiet disable systemd-networkd-wait-online.service
 #
-systemctl stop systemd-time-wait-sync.service
-systemctl disable systemd-time-wait-sync.service
+systemctl --quiet stop systemd-networkd.service
+systemctl --quiet disable systemd-networkd.service
 #
-systemctl stop timesyncd.service
-systemctl disable timesyncd.service
+systemctl --quiet stop systemd-time-wait-sync.service
+systemctl --quiet disable systemd-time-wait-sync.service
 #
-systemctl daemon-reload
+systemctl --quiet stop timesyncd.service
+systemctl --quiet disable timesyncd.service
+#
+systemctl --quiet daemon-reload
+
 
 # sed -i.bak '/# Set mirrors used by pacstrap/i\		# custom sets pacman PKGS to memdisk, for low HD space installs.\n		SysCommand(f'\''mount --rbind /var/lib/pacman/sync /mnt/archinstall/var/lib/pacman/sync/'\'')' /usr/lib/python3.11/site-packages/archinstall/scripts/guided.py
 
@@ -82,25 +89,25 @@ fi
 
 # archinstall  --offline  --skip-version-check  --config /root/scripts123/user_configuration.json --creds /root/scripts123/user_credentials.json
 
-
-systemctl stop archlinux-keyring-wkd-sync.timer
-systemctl disable archlinux-keyring-wkd-sync.timer
-systemctl stop reflector.service
-systemctl disable reflector.service
 #
-systemctl stop systemd-networkd-wait-online.service
-systemctl disable systemd-networkd-wait-online.service
+systemctl --quiet stop archlinux-keyring-wkd-sync.timer
+systemctl --quiet disable archlinux-keyring-wkd-sync.timer
+systemctl --quiet stop reflector.service
+systemctl --quiet disable reflector.service
 #
-systemctl stop systemd-networkd.service
-systemctl disable systemd-networkd.service
+systemctl --quiet stop systemd-networkd-wait-online.service
+systemctl --quiet disable systemd-networkd-wait-online.service
 #
-systemctl stop systemd-time-wait-sync.service
-systemctl disable systemd-time-wait-sync.service
+systemctl --quiet stop systemd-networkd.service
+systemctl --quiet disable systemd-networkd.service
 #
-systemctl stop timesyncd.service
-systemctl disable timesyncd.service
+systemctl --quiet stop systemd-time-wait-sync.service
+systemctl --quiet disable systemd-time-wait-sync.service
 #
-systemctl daemon-reload
+systemctl --quiet stop timesyncd.service
+systemctl --quiet disable timesyncd.service
+#
+systemctl --quiet daemon-reload
 
 echo "Using archinstall with this cmdline: "
 echo " archinstall --config /root/scripts123/user_configuration.json --creds /root/scripts123/user_credentials.json --silent --skip-ntp --offline --skip-version-check --no-pkg-lookups "
