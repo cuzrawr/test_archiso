@@ -1,3 +1,6 @@
+# WARNING THIS README.md IS AI GENERATED.
+
+
 # Offline Arch Project
 
 The **Offline Arch Project** streamlines installation for 4GB HD disks, focusing on offline capabilities. Using customized presets in Bash, it supports `archinstall` but cannot be rewritten in Python due to time constraints.
