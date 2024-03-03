@@ -17,7 +17,7 @@ The **Offline Arch Project** streamlines installation for 4GB HD disks, focusing
   - Default User: Username - "username", Password - "123"
   - Root User: Username - "root", Password - "123"
 
-  - Default disk: /dev/sda with the option to change in user_configuration.json or guided install.
+- Default disk: `/dev/sda` with the option to change in user_configuration.json or guided install.
 
 ## Implementation Details
 
