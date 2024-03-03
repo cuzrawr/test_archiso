@@ -7,6 +7,8 @@ fi
 chmod -Rf 777 /root/scripts123
 chmod -Rf 777 /localrepo
 
-/root/scripts123/not_automated_script.sh
+bash /root/scripts123/hello_dialog.sh
+
+#/root/scripts123/not_automated_script.sh
 
 ~/.automated_script.sh

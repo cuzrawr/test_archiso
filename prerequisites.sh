@@ -1,4 +1,5 @@
-# Test Prerequisites
+# Test Prerequisites                             DO NOT BLIND RUN THIS SCRIPT
+#                                                CURRENTLY ITS JUST A COMMANDS LIST
 
 # for the future local repository:
 
