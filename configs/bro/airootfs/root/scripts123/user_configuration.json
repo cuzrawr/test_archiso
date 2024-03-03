@@ -125,7 +125,8 @@
     "offline": true,
     "packages": [
         "firefox",
-        "firefox-ublock-origin"
+        "firefox-ublock-origin",
+        "mpv"
     ],
     "parallel downloads": 4,
     "profile_config": {
