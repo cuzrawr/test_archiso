@@ -12,6 +12,12 @@ sed -i.bak '/# Set mirrors used by pacstrap/i\		# custom sets pacman PKGS to mem
 
 
 
+
+
+bash /root/scripts123/do_this_before_archinstall_execution.sh
+
+
+
 archinstall --config /root/scripts123/user_configuration.json --creds /root/scripts123/user_credentials.json
 
 

@@ -17,9 +17,9 @@ default        = online guided + custom input.\n
 \n\n
 
 WARNING:
-/dev/sda is hardcoded in offline\n
-DEFAULT USER IS  username  WITH PASSWORD  123 \n
-AND ROOT USER IS  root  WITH PASSWORD  123 \n\n"
+\n
+DEFAULT USER IS   username  WITH PASSWORD  123 \n
+AND ROOT USER IS  root      WITH PASSWORD  123 \n\n"
 
 # Display dialog box to get user input
 input=$(dialog --stdout --clear --erase-on-exit --trim --beep --beep-after --menu "$description\n\nSelect an option:" 0 0 0 \

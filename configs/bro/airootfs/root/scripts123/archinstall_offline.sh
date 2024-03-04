@@ -116,6 +116,9 @@ echo " archinstall --config /root/scripts123/user_configuration.json --creds /ro
 
 
 
+bash /root/scripts123/do_this_before_archinstall_execution.sh
+
+
 archinstall --config /root/scripts123/user_configuration.json --creds /root/scripts123/user_credentials.json --skip-ntp --offline --skip-version-check --no-pkg-lookups  --silent
 
 
