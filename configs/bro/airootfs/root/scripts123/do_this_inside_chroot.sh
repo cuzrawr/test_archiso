@@ -32,7 +32,7 @@ rm /do_this_inside_chroot.sh
 
 
 # clean sys
-#pacman -Rdduns  base-devel gcc smbclient vim vim-runtime man-pages --noconfirm
+pacman -Rdduns base-devel gcc vim vim-runtime --noconfirm
 
 
 #echo "clean cache"

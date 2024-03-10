@@ -1,25 +1,32 @@
 
 ################################################################################
 
-description="
-\n OFFLINE INSTALLATION \n\n
-IN NEXT MENU USE KEYBOARD ARROWS TO NAVIGATE.\n\n
-IN NEXT MENU USE > Disk encryption  TO ENABLE DISK ENCRYPTION.\n\n
-IN NEXT MENU JUST SELECT AND PRESS > install TO CONTINUE DEFAULT INSTALLATION.\n\n
-IN NEXT MENU YOU CAN SET root AND user PASSWORDS IF NEED.\n\n
-\n\n
-DEFAULTS PASSWORD:
+description="HI, \n
 \n
- USER IS  username  WITH PASSWORD  123 \n
- ROOT IS  root      WITH PASSWORD  123 \n\n"
+FEEL FREE TO USE THE TAB KEY TO SWITCH BUTTONS AND \n
+THE ARROW KEYS TO NAVIGATE. \n
+\n
+PRESS ENTER TO SELECT AN OPTION AND PRESS ESC IF YOU WANT TO CANCEL. \n
+\n\n
+
+POSSIBLE OPTIONS:\n
+offline        = fully automatic installation with kde presset.\n
+offline guided = guided installation with kde preset.\n
+online         = online guided installation with kde preset.\n
+default        = online guided + custom input.\n
+\n\n
+
+DEFAULTS:
+\n
+DEFAULT USER IS   username  WITH PASSWORD  123 \n
+AND ROOT USER IS  root      WITH PASSWORD  123 \n\n"
 
 # Display dialog box to get user input
-input=$(dialog --stdout --clear --erase-on-exit --trim --beep --beep-after --menu "$description\n\nPress continue to continue:" 0 0 0 \
-	1 "CONTINUE")
-    # 1 "archinstall offline WORKS" \
-    # 2 "archinstall offline guided WORKS " \
-    # 3 "archinstall online BROKEN " \
-    # 4 "archinstall default + custom input BROKEN ")
+input=$(dialog --stdout --clear --erase-on-exit --trim --beep --beep-after --menu "$description\n\nSelect an option:" 0 0 0 \
+    1 "archinstall offline WORKS" \
+    2 "archinstall offline guided BROKEN " \
+    3 "archinstall online BROKEN " \
+    4 "archinstall default + custom input BROKEN ")
 
 ################################################################################
 

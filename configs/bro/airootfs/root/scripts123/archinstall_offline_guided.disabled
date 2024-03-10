@@ -4,7 +4,7 @@
 
 # patching installer:
 
-sed -i.bak 's/disk\.Size(512, disk\.Unit\.MiB, sector_size)/disk.Size(203, disk.Unit.MiB, sector_size)/g; s/disk\.Size(203, disk\.Unit\.MiB, sector_size)/disk.Size(203, disk.Unit.MiB, sector_size)/g' /usr/lib/python3.11/site-packages/archinstall/lib/interactions/disk_conf.py
+sed -i.bak 's/disk\.Size(512, disk\.Unit\.MiB, sector_size)/disk.Size(139, disk.Unit.MiB, sector_size)/g; s/disk\.Size(203, disk\.Unit\.MiB, sector_size)/disk.Size(139, disk.Unit.MiB, sector_size)/g' /usr/lib/python3.11/site-packages/archinstall/lib/interactions/disk_conf.py
 
 sed -i '/import archinstall/a from archinstall import SysCommand' /usr/lib/python3.11/site-packages/archinstall/scripts/guided.py
 
@@ -52,7 +52,16 @@ systemctl --quiet daemon-reload
 
 #############################
 if ! grep -qF '[localrepo]' /etc/pacman.conf; then
-    sed -i '/#\s*\[core-testing\]/i [localrepo]\nSigLevel = Optional TrustAll\nServer = file:///localrepo\n' /etc/pacman.conf
+
+   cp -p /root/scripts123/configs/offline_pacman.conf /etc/pacman.conf
+
+   # sed -i '/#\s*\[core-testing\]/i [localrepo]\nSigLevel = Optional TrustAll\nServer = file:///localrepo\n' /etc/pacman.conf
+
+    #sed -i '/CheckSpace/ s/^/#/' /etc/pacman.conf
+    #add newlines after noextract
+   # sed -i '/NoExtract/{s/$/\nnew text/;:a;n;ba}'  /etc/pacman.conf
+
+
     #
     # sed -i 's/#IgnoreGroup =/IgnoreGroup = base-devel/' /etc/pacman.conf
     # sed -i '/#NoExtract   =$/i\NoExtract=usr/share/doc/* usr/share/doc/'  /etc/pacman.conf
@@ -65,10 +74,10 @@ if ! grep -qF '[localrepo]' /etc/pacman.conf; then
 
 
     # disable core repo
-    sed -i "/\[core\]/,/Include/"'s/^/#/' /etc/pacman.conf
+    #sed -i "/\[core\]/,/Include/"'s/^/#/' /etc/pacman.conf
 
     # disable extra repo
-    sed -i "/\[extra\]/,/Include/"'s/^/#/' /etc/pacman.conf
+    #sed -i "/\[extra\]/,/Include/"'s/^/#/' /etc/pacman.conf
 
     # wait reflector fto finish
     printf '%s: waiting for reflector\n' "$0"

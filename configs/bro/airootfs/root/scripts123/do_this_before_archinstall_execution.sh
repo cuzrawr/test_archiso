@@ -8,3 +8,4 @@
 #base-devel gcc smbclient vim vim-runtime man-pages
 
 bash /root/scripts123/first_available_disk.sh
+bash /root/scripts123/disk_calculations.sh
