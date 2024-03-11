@@ -21,10 +21,10 @@ echo "[*] patching: installer.py"
 sed -i 's/time\.sleep(1)/time.sleep(5); break/g' /usr/lib/python3.11/site-packages/archinstall/lib/installer.py
 
 echo "[*] patching: system_conf.py"
-sed -i '/kernels/ s/]/, "linux-fsync-nobara-bin"]/g'  /usr/lib/python3.11/site-packages/archinstall/lib/interactions/system_conf.py
+sed -i '/kernels = / s/]/, "linux-fsync-nobara-bin"]/g'  /usr/lib/python3.11/site-packages/archinstall/lib/interactions/system_conf.py
 
 echo "[*] patching: installer.py"
-sed -i '/__packages__/ s/]/, "linux-fsync-nobara-bin"]/g' /usr/lib/python3.11/site-packages/archinstall/lib/installer.py
+sed -i '/__packages__ = / s/]/, "linux-fsync-nobara-bin"]/g' /usr/lib/python3.11/site-packages/archinstall/lib/installer.py
 
 echo "[*] patching: kde.py"
 sed -i 's/plasma-meta/plasma-desktop/g' /usr/lib/python3.11/site-packages/archinstall/default_profiles/desktops/kde.py
@@ -55,8 +55,8 @@ systemctl --quiet --no-warn disable systemd-networkd.service
 systemctl --quiet --no-warn stop systemd-time-wait-sync.service
 systemctl --quiet --no-warn disable systemd-time-wait-sync.service
 #
-systemctl --quiet --no-warn stop timesyncd.service
-systemctl --quiet --no-warn disable timesyncd.service
+#systemctl --quiet --no-warn stop timesyncd.service
+#systemctl --quiet --no-warn disable timesyncd.service
 #
 systemctl --quiet --no-warn daemon-reload
 
@@ -139,8 +139,8 @@ systemctl --quiet --no-warn disable systemd-networkd.service
 systemctl --quiet --no-warn stop systemd-time-wait-sync.service
 systemctl --quiet --no-warn disable systemd-time-wait-sync.service
 #
-systemctl --quiet --no-warn stop timesyncd.service
-systemctl --quiet --no-warn disable timesyncd.service
+#systemctl --quiet --no-warn stop timesyncd.service
+#systemctl --quiet --no-warn disable timesyncd.service
 #
 systemctl --quiet --no-warn daemon-reload
 
