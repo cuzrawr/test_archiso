@@ -17,5 +17,5 @@ result=$((size - 147849216))
 echo "-------------------------------------------------------------------------"
 echo "Disc partition precalcualtions autodetect: $result bytes to rootfs"
 echo "-------------------------------------------------------------------------"
-sed -i "s|REPLACEMEREPLACEMEREPLACEMEBYTESBYTESROOTFS|$result|g" /root/scripts123/user_configuration.json
+sed -i "s|\"REPLACEMEREPLACEMEREPLACEMEBYTESBYTESROOTFS\"|$result|g" /root/scripts123/user_configuration.json
 echo "-------------------------------------------------------------------------"

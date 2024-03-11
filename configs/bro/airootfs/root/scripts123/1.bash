@@ -76,39 +76,15 @@ while true; do
 done
 
 # Pass input data to next script or process
-# echo "Encrp password will be: $encryptionPassword"
-# echo "User  password will be: $userPassword"
-# echo "root  password will be: $rootPassword"
-# echo "username       will be: $userName"
+echo "Encrp password will be: $encryptionPassword"
+echo "User  password will be: $userPassword"
+echo "root  password will be: $rootPassword"
+echo "username       will be: $userName"
 # Next steps here...
 
-
-# setup username
-echo "[*] setup username"
-sed -i "s/RRRRRRREEEEEEPLACMEEUSERNAME/$userName/g" /root/scripts123/do_this_inside_chroot.sh
-sed -i "s/RRRRRRREEEEEEPLACMEEUSERNAME/$userName/g" /root/scripts123/user_credentials.json
-# setup passwords
-echo "[*] setup passwords"
-#sed -i "s/RRRRRRREEEEEEPLACMEEUSERNAME/$userName/g" /root/scripts123/do_this_inside_chroot.sh
-#sed -i "s/RRRRRRREEEEEEPLACMEEUSERNAME/$userName/g" /root/scripts123/user_credentials.json
-#
-jq --arg root_pass "$rootPassword" --arg user_pass "$userPassword" '.["!root-password"]=$root_pass | .["!users"][0]["!password"]=$user_pass' /root/scripts123/user_credentials.json > /root/scripts123/user_credentials.json
-
-
-echo "[*] using proper encryption metod"
 if [ "$encryptionPassword" = "" ]; then
-    echo "[*] The encryption has been disabled because no password was provided"
-else
-    echo "[*] The encryption password provided"
-    # Perform encryption tasks if encryptionPassword is not empty
-    jq '. + { "encryption_password": "'"$encryptionPassword"'" }' /root/scripts123/user_credentials.json > /root/scripts123/user_credentials.json
-    #mv /root/temp.json /root/test.json
-    jq '. + {"disk_encryption": {"encryption_type": "luks", "partitions": ["95b57b0a-ca5c-416a-89ef-2c6c43bb64fa"]}}' /root/scripts123/user_configuration.json > /root/scripts123/user_configuration.json
-    #mv /root/temp.json /root/test.json
+    echo "[*] the encryption has been disabled because no password was provided"
 fi
-
-
-#RRRRRRREEEEEEPLACMEE
 
 # dialog --backtitle "Dialog Form Example" --title "Dialog - Form" \
 # --form "\nDialog Sample Label and Values" 25 60 16 \
@@ -116,6 +92,3 @@ fi
 # "Form Label 2:" 2 1 "Value 2" 2 25 25 30 \
 # "Form Label 3:" 3 1 "Value 3" 3 25 25 30 \
 # "Form Label 4:" 4 1 "Value 4" 4 25 25 30
-
-echo "[*] running installation scripts..."
-bash /root/scripts123/archinstall_offline.sh

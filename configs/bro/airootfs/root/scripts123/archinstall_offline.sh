@@ -6,15 +6,15 @@ echo "[*] patching archinstall installer"
 echo "[*] patching: disk_conf.py"
 sed -i.bak 's/disk\.Size(512, disk\.Unit\.MiB, sector_size)/disk.Size(139, disk.Unit.MiB, sector_size)/g; s/disk\.Size(203, disk\.Unit\.MiB, sector_size)/disk.Size(139, disk.Unit.MiB, sector_size)/g' /usr/lib/python3.11/site-packages/archinstall/lib/interactions/disk_conf.py
 
-#echo "[*] patching: guided.py"
-#sed -i '/import archinstall/a from archinstall import SysCommand' /usr/lib/python3.11/site-packages/archinstall/scripts/guided.py
+echo "[*] patching: guided.py"
+sed -i '/import archinstall/a from archinstall import SysCommand' /usr/lib/python3.11/site-packages/archinstall/scripts/guided.py
 
 # sed -i.bak '/# Set mirrors used by pacstrap/i\		# custom sets pacman PKGS to memdisk, for low HD space installs.\n		SysCommand(f'\''mount -t tmpfs -o size=99% tmpfs /mnt/archinstall/var/cache/pacman/pkg'\'')' /usr/lib/python3.11/site-packages/archinstall/scripts/guided.py
 
 
-#echo "[*] patching: guided.py"
+echo "[*] patching: guided.py"
 # hack to low hd isntall
-#sed -i.bak '/# Set mirrors used by pacstrap/i\		# custom sets pacman PKGS to memdisk, for low HD space installs.\n		SysCommand(f'\''mount --rbind /localrepo /mnt/archinstall/var/cache/pacman/pkg/'\'')' /usr/lib/python3.11/site-packages/archinstall/scripts/guided.py
+sed -i.bak '/# Set mirrors used by pacstrap/i\		# custom sets pacman PKGS to memdisk, for low HD space installs.\n		SysCommand(f'\''mount --rbind /localrepo /mnt/archinstall/var/cache/pacman/pkg/'\'')' /usr/lib/python3.11/site-packages/archinstall/scripts/guided.py
 
 echo "[*] patching: installer.py"
 # works by breaking while loops (there bug with key generation stuck )
@@ -29,10 +29,10 @@ sed -i 's/plasma-meta/plasma-desktop/g' /usr/lib/python3.11/site-packages/archin
 #echo "[*] patching: guided.py"
 #sed -i '/global_menu.enable/{/disk_encryption\|root-password\|install\|disk\|users/! s/^/# /}' /usr/lib/python3.11/site-packages/archinstall/scripts/guided.py
 
-echo "[*] copy patched guided.py"
+#echo "[*] copy patched guided.py"
 #sed -i "s/if archinstall.arguments.get('advanced', False):/#if archinstall.arguments.get('advanced', False):/g" /usr/lib/python3.11/site-packages/archinstall/scripts/guided.py
 
-cp -p /root/scripts123/configs/guided.py /usr/lib/python3.11/site-packages/archinstall/scripts/guided.py
+#cp -p /root/scripts123/configs/guided.py /usr/lib/python3.11/site-packages/archinstall/scripts/guided.py
 
 echo "[*] tune: services"
 #
@@ -149,7 +149,7 @@ echo "[*] Using archinstall with this cmdline: "
 echo " archinstall --config /root/scripts123/user_configuration.json --creds /root/scripts123/user_credentials.json --skip-ntp --offline --skip-version-check --no-pkg-lookups "
 
 
-archinstall --config /root/scripts123/user_configuration.json --creds /root/scripts123/user_credentials.json --skip-ntp --offline --skip-version-check --no-pkg-lookups
+archinstall --config /root/scripts123/user_configuration.json --creds /root/scripts123/user_credentials.json --skip-ntp --offline --skip-version-check --no-pkg-lookups --silent
 
 
 

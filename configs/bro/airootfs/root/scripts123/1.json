@@ -158,7 +158,7 @@
         }
     },
     "script": "guided",
-    "silent": true,
+    "silent": false,
     "skip_ntp": true,
     "skip_version_check": true,
     "swap": false,
@@ -166,10 +166,10 @@
     "uki": false,
     "version": "2.7.1",
     "custom-commands": [
-        "echo SUCCESS",
-        "echo SUCCESS",
-        "echo SUCCESS",
-        "echo SUCCESS"
+        "echo example_command_execution_from_chroot0",
+        "echo example_command_execution_from_chroot1",
+        "echo example_command_execution_from_chroot2",
+        "echo example_command_execution_from_chroot3"
     ]
 
 }

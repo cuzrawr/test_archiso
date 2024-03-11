@@ -1,0 +1,3 @@
+
+# find encrypted in /dev/sda*
+sudo blkid -t TYPE=crypto_LUKS -s TYPE -d -o device /dev/sda*

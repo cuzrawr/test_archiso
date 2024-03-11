@@ -1,0 +1,1 @@
+cat user_configuration.json | jq '. + {"disk_encryption": {"encryption_type": "luks", "partitions": ["95b57b0a-ca5c-416a-89ef-2c6c43bb64fa"]}}'

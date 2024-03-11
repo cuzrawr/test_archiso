@@ -30,7 +30,7 @@
                                 "value": 512
                             },
                             "unit": "MiB",
-                            "value": 203
+                            "value": 139
                         },
                         "start": {
                             "sector_size": {
@@ -90,7 +90,7 @@
                                 "value": 512
                             },
                             "unit": "B",
-                            "value": 3972005888
+                            "value": REPLACEMEREPLACEMEREPLACEMEBYTESBYTESROOTFS
                         },
                         "start": {
                             "sector_size": {
@@ -98,7 +98,7 @@
                                 "value": 512
                             },
                             "unit": "B",
-                            "value": 213909504
+                            "value": 146800640
                         },
                         "status": "create",
                         "type": "primary"
@@ -124,11 +124,26 @@
     "ntp": true,
     "offline": true,
     "packages": [
+        "plasma-browser-integration",
+        "plasma-nm",
+        "kwrited",
+        "print-manager",
+        "powerdevil",
+        "sddm-kcm",
+        "xdg-desktop-portal-kde",
+        "plasma-welcome",
+        "plasma-integration",
+        "kpipewire",
+        "mpv",
         "firefox",
         "firefox-ublock-origin",
-        "mpv"
+        "hunspell-en_us",
+        "hunspell-de",
+        "libreoffice-fresh",
+        "libreoffice-fresh-de",
+        "discover"
     ],
-    "parallel downloads": 4,
+    "parallel downloads": 10,
     "profile_config": {
         "gfx_driver": "All open-source",
         "greeter": "sddm",
@@ -143,8 +158,8 @@
         }
     },
     "script": "guided",
-    "silent": true,
-    "skip_ntp": false,
+    "silent": false,
+    "skip_ntp": true,
     "skip_version_check": true,
     "swap": false,
     "timezone": "Europe/Stockholm",
