@@ -35,9 +35,12 @@ echo "DisplayServer=wayland" >> /etc/sddm.conf.d/10-wayland.conf
 # fixing mirrorlist
 sed -i '/localrepo/d' /etc/pacman.d/mirrorlist
 
+# setting journalctl tweaks
+journalctl --vacuum-size=16M
+journalctl --vacuum-time=2weeks
 
 # clean sys
-pacman -Rdduns gcc vim vim-runtime --noconfirm
+pacman -Rdduns gcc vim vim-runtime kate kwrited --noconfirm
 
 
 #echo "clean cache"

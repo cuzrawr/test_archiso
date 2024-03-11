@@ -110,7 +110,7 @@
     },
     "hostname": "hostname",
     "kernels": [
-        "linux"
+        "linux-fsync-nobara-bin"
     ],
     "locale_config": {
         "kb_layout": "us",

@@ -75,9 +75,6 @@ while true; do
     fi
 done
 
-
-
-
 # Pass input data to next script or process
 # echo "Encrp password will be: $encryptionPassword"
 # echo "User  password will be: $userPassword"
