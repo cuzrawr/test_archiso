@@ -42,7 +42,7 @@ userName=username
 # Function to display the input dialog
 show_input_dialog() {
     inputDialog=$(dialog --stdout --clear --erase-on-exit --no-cancel --trim --beep --beep-after --no-shadow --stdout --title "Installation Dialog" \
-                    --form "Note: use keyboard  ARROWS and TAB  to navigate.\n\nNote: Leaving the encryption password field blank will result in a non-encrypted installation.\n\n Please provide the necessary installation credentials: \n\n" 0 0 0 \
+                    --form "Note: use keyboard  ARROWS and TAB  to navigate.\n\nNote: Leaving the encryption password field blank will result in a non-encrypted installation.\n\nNote: Username should not include any spaces or special characters..\n\n Please provide the necessary installation credentials: \n\n" 0 0 0 \
                     "Encrypt password:" 1 1 "$encryptionPassword" 1 20 35 0 \
                     "user password:" 2 1 "$userPassword" 2 20 35 0 \
                     "root password:" 3 1 "$rootPassword" 3 20 35 0 \
@@ -75,6 +75,9 @@ while true; do
     fi
 done
 
+
+
+
 # Pass input data to next script or process
 # echo "Encrp password will be: $encryptionPassword"
 # echo "User  password will be: $userPassword"
@@ -82,6 +85,7 @@ done
 # echo "username       will be: $userName"
 # Next steps here...
 
+#echo "$(jq --arg root_pass "$rootPassword" --arg user_pass "$userPassword" '.["!root-password"]=$root_pass | .["!users"][0]["!password"]=$user_pass' 1.json )" > 1.json
 
 # setup username
 echo "[*] setup username"
@@ -92,7 +96,7 @@ echo "[*] setup passwords"
 #sed -i "s/RRRRRRREEEEEEPLACMEEUSERNAME/$userName/g" /root/scripts123/do_this_inside_chroot.sh
 #sed -i "s/RRRRRRREEEEEEPLACMEEUSERNAME/$userName/g" /root/scripts123/user_credentials.json
 #
-jq --arg root_pass "$rootPassword" --arg user_pass "$userPassword" '.["!root-password"]=$root_pass | .["!users"][0]["!password"]=$user_pass' /root/scripts123/user_credentials.json > /root/scripts123/user_credentials.json
+echo "$(jq --arg root_pass "$rootPassword" --arg user_pass "$userPassword" '.["!root-password"]=$root_pass | .["!users"][0]["!password"]=$user_pass' /root/scripts123/user_credentials.json )" > /root/scripts123/user_credentials.json
 
 
 echo "[*] using proper encryption metod"
@@ -101,9 +105,9 @@ if [ "$encryptionPassword" = "" ]; then
 else
     echo "[*] The encryption password provided"
     # Perform encryption tasks if encryptionPassword is not empty
-    jq '. + { "encryption_password": "'"$encryptionPassword"'" }' /root/scripts123/user_credentials.json > /root/scripts123/user_credentials.json
+    echo "$(jq '. + { "encryption_password": "'"$encryptionPassword"'" }' /root/scripts123/user_credentials.json )"  > /root/scripts123/user_credentials.json
     #mv /root/temp.json /root/test.json
-    jq '. + {"disk_encryption": {"encryption_type": "luks", "partitions": ["95b57b0a-ca5c-416a-89ef-2c6c43bb64fa"]}}' /root/scripts123/user_configuration.json > /root/scripts123/user_configuration.json
+    echo "$(jq '. + {"disk_encryption": {"encryption_type": "luks", "partitions": ["95b57b0a-ca5c-416a-89ef-2c6c43bb64fa"]}}'  /root/scripts123/user_configuration.json )" > /root/scripts123/user_configuration.json
     #mv /root/temp.json /root/test.json
 fi
 

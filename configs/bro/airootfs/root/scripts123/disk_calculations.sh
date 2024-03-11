@@ -7,7 +7,7 @@ size=$(blockdev --getsize64 /dev/sda)
 # currently hardcoded in user_configuration.json
 # 147849216 = boot partition size + 1 MiB
 # so we subtract it from whole disk size to fit our rootfs
-result=$((size - 147849216))
+result=$((size - 214958080))
 
 # Output the result
 #echo "Disc partition precalcualtions autodetect: $result bytes to rootfs"

@@ -30,7 +30,7 @@
                                 "value": 512
                             },
                             "unit": "MiB",
-                            "value": 139
+                            "value": 203
                         },
                         "start": {
                             "sector_size": {
@@ -98,7 +98,7 @@
                                 "value": 512
                             },
                             "unit": "B",
-                            "value": 146800640
+                            "value": 213909504
                         },
                         "status": "create",
                         "type": "primary"
