@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # WARNING THAT ARE ALL PIECO OF KLUDGES BUT FASTEST WAY TO WRITE IT I DONT CARE
-echo "[*] patching archinstall installer"
+echo "[*] patching whole archinstall installer... please wait"
 # patching installer:
 echo "[*] patching: disk_conf.py"
 sed -i.bak 's/disk\.Size(512, disk\.Unit\.MiB, sector_size)/disk.Size(203, disk.Unit.MiB, sector_size)/g; s/disk\.Size(203, disk\.Unit\.MiB, sector_size)/disk.Size(203, disk.Unit.MiB, sector_size)/g' /usr/lib/python3.11/site-packages/archinstall/lib/interactions/disk_conf.py
@@ -14,7 +14,10 @@ sed -i '/import archinstall/a from archinstall import SysCommand' /usr/lib/pytho
 
 echo "[*] patching: guided.py"
 # hack to low hd isntall
-sed -i.bak '/# Set mirrors used by pacstrap/i\		# custom sets pacman PKGS to memdisk, for low HD space installs.\n		SysCommand(f'\''mount --rbind /localrepo /mnt/archinstall/var/cache/pacman/pkg/'\'')' /usr/lib/python3.11/site-packages/archinstall/scripts/guided.py
+sed -i '/installation.minimal_installation(/i\		# custom sets pacman PKGS to memdisk, for low HD space installs.\n		SysCommand(f'\''mount --rbind /localrepo /mnt/archinstall/var/cache/pacman/pkg/'\'')' /usr/lib/python3.11/site-packages/archinstall/scripts/guided.py
+
+#echo "[*] patching: guided.py"
+#sed -i '/installation.minimal_installation(/i\		# custom sets our own pacman.conf aaaaaaaaaaaaaaaaaatest.\n		SysCommand(f'\''mkdir -p /mnt/archinstall/etc/ && cp -p /root/scripts123/configs/insystem_pacman.conf /mnt/archinstall/etc/pacman.conf'\'')' /usr/lib/python3.11/site-packages/archinstall/scripts/guided.py
 
 echo "[*] patching: installer.py"
 # works by breaking while loops (there bug with key generation stuck )
@@ -29,6 +32,15 @@ sed -i '/__packages__ = / s/]/, "linux-fsync-nobara-bin"]/g' /usr/lib/python3.11
 echo "[*] patching: kde.py"
 sed -i 's/plasma-meta/plasma-desktop/g' /usr/lib/python3.11/site-packages/archinstall/default_profiles/desktops/kde.py
 
+# removing bootloader fallback conf generation (we keep only primary)
+echo "[*] patching: installer.py"
+sed -i "s/'', '-fallback'/'',/g" /usr/lib/python3.11/site-packages/archinstall/lib/installer.py
+
+echo "[*] patching: installer.py"
+sed -i "s/\"\", \"-fallback\"/\"\",/g" /usr/lib/python3.11/site-packages/archinstall/lib/installer.py
+
+echo "[*] patching: installer.py"
+sed -i "s/options = 'options '/options = 'options quiet loglevel=3 systemd.show_status=auto rd.udev.log_level=3 '/g" /usr/lib/python3.11/site-packages/archinstall/lib/installer.py
 
 #
 #echo "[*] patching: guided.py"

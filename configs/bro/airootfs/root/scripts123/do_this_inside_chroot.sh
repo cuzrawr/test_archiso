@@ -9,6 +9,9 @@ echo "[*] setting up system configs"
 #
 sed -i '/\/var\/cache\/pacman\/pkg/ s/^/#/' /etc/fstab
 echo -ne "\n\ntmpfs  /var/cache/pacman/pkg    tmpfs    defaults,size=50%    0  0" >> /etc/fstab
+# this rase errors with btrfs on log with pacman updates, so we keep good old tmpfs
+sed -i '/\/var\/log/ s/^/#/' /etc/fstab
+echo -ne "\n\ntmpfs /var/log tmpfs defaults,size=10%,noexec,noatime,mode=1777 0 0"  >> /etc/fstab
 # echo "tmpfs   /var/log     tmpfs   defaults,size=10%,noexec,noatime,mode=1777 0 0" | sudo tee -a /etc/fstab
 # echo "tmpfs   /run         tmpfs   nodev,nosuid,size=5%,mode=755   0    0" | sudo tee -a /etc/fstab
 # echo "tmpfs   /run/lock    tmpfs   noexec,nosuid,nodev,mode=1777   0    0 " | sudo tee -a /etc/fstab
@@ -39,8 +42,13 @@ sed -i '/localrepo/d' /etc/pacman.d/mirrorlist
 journalctl --vacuum-size=16M
 journalctl --vacuum-time=2weeks
 
+
+# remove systemd-boot timeout
+#rm /boot/loader/loader.conf
+
+
 # clean sys
-pacman -Rdduns gcc vim vim-runtime kate kwrited --noconfirm
+pacman -Rdduns gcc vim vim-runtime kate --noconfirm
 
 
 #echo "clean cache"

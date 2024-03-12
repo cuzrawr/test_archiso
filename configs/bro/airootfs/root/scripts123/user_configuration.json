@@ -1,6 +1,6 @@
 {
     "additional-repositories": [],
-    "archinstall-language": "English",
+    "archinstall-language": "German",
     "audio_config": {
         "audio": "pipewire"
     },
@@ -113,9 +113,9 @@
         "linux-fsync-nobara-bin"
     ],
     "locale_config": {
-        "kb_layout": "us",
+        "kb_layout": "de",
         "sys_enc": "UTF-8",
-        "sys_lang": "en_US"
+        "sys_lang": "de_DE"
     },
     "network_config": {
         "type": "nm"
@@ -126,7 +126,6 @@
     "packages": [
         "plasma-browser-integration",
         "plasma-nm",
-        "kwrited",
         "print-manager",
         "powerdevil",
         "sddm-kcm",
@@ -134,14 +133,16 @@
         "plasma-welcome",
         "plasma-integration",
         "kpipewire",
-        "mpv",
         "firefox",
         "firefox-ublock-origin",
         "hunspell-en_us",
         "hunspell-de",
         "libreoffice-fresh",
         "libreoffice-fresh-de",
-        "discover"
+        "discover",
+        "packagekit-qt6",
+        "plasma-integration",
+        "firefox-i18n-de"
     ],
     "parallel downloads": 10,
     "profile_config": {

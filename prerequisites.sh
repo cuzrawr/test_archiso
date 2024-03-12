@@ -17,7 +17,7 @@ sudo chmod -Rf 755 configs/bro/airootfs/localrepo
 #
 # kde defaults
 
-sudo pacman --config configs/bro/pacman.conf --noconfirm -Syw --cachedir configs/bro/airootfs/localrepo --dbpath configs/bro/airootfs/localrepo base base-devel linux-firmware linux btrfs-progs efibootmgr networkmanager network-manager-applet pipewire pipewire-alsa pipewire-jack pipewire-pulse gst-plugin-pipewire libpulse wireplumber firefox nano vim openssh htop wget iwd wireless_tools wpa_supplicant smartmontools xdg-utils plasma-meta konsole kwrite dolphin ark plasma-workspace egl-wayland xorg-server xorg-xinit mesa xf86-video-amdgpu xf86-video-ati xf86-video-nouveau xf86-video-vmware libva-mesa-driver libva-intel-driver intel-media-driver vulkan-radeon vulkan-intel sddm hunspell-en_us hunspell-de mpv libreoffice-fresh firefox-ublock-origin xdg-utils smartmontools wpa_supplicant wireless_tools iwd wget openssh vim nano amd-ucode libreoffice-fresh-de intel-ucode dialog
+sudo pacman --config configs/bro/pacman.conf --noconfirm -Syw --cachedir configs/bro/airootfs/localrepo --dbpath configs/bro/airootfs/localrepo base base-devel linux-firmware linux btrfs-progs efibootmgr networkmanager network-manager-applet pipewire pipewire-alsa pipewire-jack pipewire-pulse gst-plugin-pipewire libpulse wireplumber firefox nano vim openssh htop wget iwd wireless_tools wpa_supplicant smartmontools xdg-utils plasma-meta konsole kwrite dolphin ark plasma-workspace egl-wayland xorg-server xorg-xinit mesa xf86-video-amdgpu xf86-video-ati xf86-video-nouveau xf86-video-vmware libva-mesa-driver libva-intel-driver intel-media-driver vulkan-radeon vulkan-intel sddm hunspell-en_us hunspell-de mpv libreoffice-fresh firefox-ublock-origin xdg-utils smartmontools wpa_supplicant wireless_tools iwd wget openssh vim nano amd-ucode libreoffice-fresh-de intel-ucode dialog packagekit-qt6 plasma-integration firefox-i18n-de
 
 # copy custom kernel also
 
@@ -33,7 +33,13 @@ sudo rm -rf configs/bro/airootfs/localrepo/sync
 #sudo repo-add configs/bro/airootfs/localrepo/localrepo.db.tar.gz configs/bro/airootfs/localrepo/!(*.sig)
 sudo bash repo-add configs/bro/airootfs/localrepo/localrepo.db.tar.gz configs/bro/airootfs/localrepo/!(*.sig)
 
-
+#
+# W A R N I N G
+#
+# KEEP IN MIND YOUR DATABASE SHOULD EXIST AFTER THIS COMMANDS AS
+# 'configs/bro/airootfs/localrepo/localrepo.db.tar.gz'
+# IF NOT = SOMETHING WRONG
+#
 
 #
 #sudo repo-add -n configs/bro/airootfs/localrepo/localrepo.db.tar.gz configs/bro/airootfs/localrepo/*.tar.zst
