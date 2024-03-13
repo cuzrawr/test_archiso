@@ -111,16 +111,19 @@ EOF
                     echo "===Millitärische Verschlüsselung (LUKS) erster Boot-Assistent=========Deutsch==="
                     echo "Willkommen beim Einrichten Ihres neuen Kontos! Dies ist der erste Schritt, bei dem Sie ein Passwort erstellen müssen. Bitte geben Sie unten Ihr neues Passwort ein. Denken Sie daran, dass dieser Vorgang nicht rückgängig gemacht werden kann. Wählen Sie also ein Passwort, das sicher und einprägsam ist                                                               "
                     echo "Enter your password ( input not visible ) and press enter: "
-                    echo -n "Geben Sie Ihr Passwort ein (Eingabe nicht sichtbar) und drücken Sie die Eingabetaste: "
-                    read -s new_password
-                    echo
+                    echo "Geben Sie Ihr Passwort ein (Eingabe nicht sichtbar) und drücken Sie die Eingabetaste: "
+
+                    read -s new_password && echo $new_password
+                    echo ""
+
+
                     echo "Installing password:   $new_password   to root partition."
-                    echo "Installieren des Passworts: $new_password auf der Root-Partition."
+                    echo "Installieren des Passworts:   $new_password    auf der Root-Partition."
                     echo
                     echo -e "123\n${new_password}\n${new_password}" | cryptsetup luksChangeKey "${resolved}"
                     echo
-                    echo "Changing default LUKS password..."
-                    echo "Ändern des Standard-LUKS-Passworts..."
+                    echo "Changing default LUKS password... "
+                    echo "Ändern des Standard-LUKS-Passworts... "
                     echo -ne "#####                     (33%)\r"
                     sleep 1
                     echo -ne "#############             (66%)\r"

@@ -178,11 +178,16 @@ bash /root/scripts123/do_this_outside_chroot.sh
 echo "[*] making black magic inside chroot"
 cp /root/scripts123/do_this_inside_chroot.sh /mnt/archinstall/do_this_inside_chroot.sh
 arch-chroot /mnt/archinstall bash /do_this_inside_chroot.sh
-echo " "
+
+
+#complete
 echo "[*] installer: complete"
+clear
+
+
 echo ' ------------------------------------------------------------------------'
 echo ' ... INSTALL COMPLETED ...   '
-echo ' ... POWEROFF IN 20 SECONDS, PRESS  ctrl + c  TO CANCEL ...'
+echo ' ... POWEROFF IN 20 SECONDS, PRESS  ctrl + c  TO CANCEL & DROP TO zsh ...'
 echo ' ------------------------------------------------------------------------'
 
 sleep 20s && poweroff
