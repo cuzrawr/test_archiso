@@ -102,6 +102,8 @@ EOF
             	# Check if it's the first boot
                 if echo -e "123\n" | cryptsetup luksOpen ${resolved} crypttest >/dev/null 2>&1; then
                     cryptsetup luksClose crypttest
+                    #new_password=123
+                    #echo -e '\033[?6c'
                     # Prompt the user for a new password
                     echo "===Millitary grade encryption (LUKS) first boot wizard================English==="
                     echo "Welcome to setting up your new account! This is the first step where you will need to create a password. Please enter your new password below. Remember, this action cannot be undone, so be sure to choose a password that is secure and memorable for you                   "
@@ -112,36 +114,28 @@ EOF
                     echo -n "Geben Sie Ihr Passwort ein (Eingabe nicht sichtbar) und drücken Sie die Eingabetaste: "
                     read -s new_password
                     echo
-                    # Change LUKS password
-
+                    echo "Installing password:   $new_password   to root partition."
+                    echo "Installieren des Passworts: $new_password auf der Root-Partition."
+                    echo
                     echo -e "123\n${new_password}\n${new_password}" | cryptsetup luksChangeKey "${resolved}"
+                    echo
                     echo "Changing default LUKS password..."
                     echo "Ändern des Standard-LUKS-Passworts..."
                     echo -ne "#####                     (33%)\r"
                     sleep 1
                     echo -ne "#############             (66%)\r"
-                    sleep 1
+                    sleep 2
                     echo -ne "#######################   (100%)\r"
                     echo -ne "\n"
-
                     echo "IN NEXT MENU PROVIDE YOUR NEW PASSWORD TO BOOT YOUR NEW SYSTEM"
                     echo "GEBEN SIE IM NÄCHSTEN MENÜ IHR NEUES PASSWORT EIN, UM IHR NEUES SYSTEM ZU STARTEN"
                     echo -ne "#####                     (33%)\r"
-                    sleep 2
-                    echo -ne "#############             (66%)\r"
                     sleep 3
+                    echo -ne "#############             (66%)\r"
+                    sleep 7
                     echo -ne "#######################   (100%)\r"
                     echo -ne "\n"
-
                     echo ""
-
-
-                    # Remove old LUKS password
-                    #echo "Removing old LUKS password..."
-                    #echo -e "${old_password}" | cryptsetup luksKillSlot /dev/${cryptdev} 0
-
-                    # Create a marker to indicate that the first boot is done
-                    #touch /etc/.first_boot_done
                 fi
 
                 if command -v plymouth >/dev/null 2>&1 && plymouth --ping 2>/dev/null; then

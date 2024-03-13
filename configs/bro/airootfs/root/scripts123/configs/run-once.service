@@ -1,0 +1,10 @@
+[Unit]
+Description=Run Once at Boot
+
+[Service]
+ExecStart=/bin/bash /bin/script.sh
+RemainAfterExit=no
+Type=oneshot
+
+[Install]
+WantedBy=multi-user.target

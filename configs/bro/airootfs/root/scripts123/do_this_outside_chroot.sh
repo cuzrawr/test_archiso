@@ -13,11 +13,24 @@ sed -i "s/PRESETS=('default' 'fallback')/PRESETS=('default')/" /mnt/archinstall/
 echo "[*] patching mkinitcpio... "
 sed -i '/^HOOKS=/ s/\budev\b/plymouth udev/' /mnt/archinstall/etc/mkinitcpio.conf
 
-echo "[*] temporary patching encrypt hook"
-cp /mnt/archinstall/usr/lib/initcpio/hooks/encrypt /mnt/archinstall/usr/lib/initcpio/hooks/encrypt.bak
-cp /root/scripts123/configs/encrypt /mnt/archinstall/usr/lib/initcpio/hooks/encrypt
 
+if grep -qo "encryption_password" "/root/scripts123/user_credentials.json"; then
 
+    touch /mnt/archinstall/.istrulyencryptediswear
 
+    echo "[*] temporary patching encrypt hook"
+    cp /mnt/archinstall/usr/lib/initcpio/hooks/encrypt /mnt/archinstall/usr/lib/initcpio/hooks/encrypt.bak
+    echo "[*] temporary patching encrypt hook"
+    cp /root/scripts123/configs/encrypt /mnt/archinstall/usr/lib/initcpio/hooks/encrypt
+
+    #
+    echo "[*] copy scripts to system"
+    cp /root/scripts123/configs/run-once.service /mnt/archinstall/etc/systemd/system/run-once.service
+    echo "[*] copy scripts to system"
+    cp /root/scripts123/configs/script.sh /mnt/archinstall/bin/script.sh
+
+else
+    echo "[*] File does not contain encrypted data. Doing nothing."
+fi
 # next stage will be inside chroot so we umount current installer hardcoded mounts
 #umount /mnt/archinstall/var/cache/pacman/pkg/

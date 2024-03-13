@@ -182,7 +182,7 @@ echo " "
 echo "[*] installer: complete"
 echo ' ------------------------------------------------------------------------'
 echo ' ... INSTALL COMPLETED ...   '
-echo ' ... REBOOT IN 10 SECONDS, PRESS  ctrl + c  TO CANCEL ...'
+echo ' ... POWEROFF IN 20 SECONDS, PRESS  ctrl + c  TO CANCEL ...'
 echo ' ------------------------------------------------------------------------'
 
-sleep 10s && reboot
+sleep 20s && poweroff

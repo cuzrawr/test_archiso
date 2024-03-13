@@ -53,7 +53,7 @@ userName=username
 
 
 # Display a menu with two selectable options
-choice=$(dialog --clear --stdout --erase-on-exit --trim --no-shadow --beep --beep-after --title "Select Option" \
+choice=$(dialog --clear --no-cancel --stdout --erase-on-exit --trim --no-shadow --beep --beep-after --title "Select Option" \
 --menu "USE ARROWS TO NAVIGATE AND ENTER TO SELECT\nChoose one of the following options:\n==================\nVERWENDEN SIE DIE PFEILE ZUM NAVIGIEREN UND DIE EINGABETASTE ZUM AUSWÄHLEN\n\nWählen Sie eine der folgenden Optionen:\n" 0 0 0 \
 1 "NOT ENCRYPTED (Default) | NICHT VERSCHLÜSSELT (Standard)" \
 2 "ENCRYPTED | VERSCHLÜSSELT ")

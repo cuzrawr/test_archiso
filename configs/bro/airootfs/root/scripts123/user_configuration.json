@@ -143,7 +143,9 @@
         "packagekit-qt6",
         "plasma-integration",
         "firefox-i18n-de",
-        "plymouth"
+        "plymouth",
+        "ttf-dejavu",
+        "ttf-liberation"
     ],
     "parallel downloads": 10,
     "profile_config": {

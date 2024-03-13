@@ -51,67 +51,35 @@ echo "[*] remove unneedded fallback kernels"
 rm /boot/*-fallback.img
 
     #mv /root/temp.json /root/test.json
-# Check if file exists
+##############################################################################
 
-if grep -qo "encryption_password" "/root/scripts123/user_credentials.json"; then
+echo "[*] adding whitemagic to compensate blackmagic"
+if [ -e /.istrulyencryptediswear ]; then
 
+    rm /.istrulyencryptediswear
     ########
-    echo "[*] adding whitemagic to compensate blackmagic"
+
     echo "[*] set plymouth theme (rebuilding mkinitcpio with our encrypt script)"
     plymouth-set-default-theme tribar -R
-    echo "[*] making true one shot script"
-
-    cat <<EOF > /etc/systemd/system/run-once.service
-    [Unit]
-    Description=Run Once at Boot
-    After=graphical.target
-
-    [Service]
-    Type=oneshot
-    ExecStart=/bin/script.sh
-
-    [Install]
-    WantedBy=multi-user.target
-
-    EOF
-
-
-    cat <<EOF > /bin/script.sh
-    #!/bin/bash
-
-    cp /mnt/archinstall/usr/lib/initcpio/hooks/encrypt.bak /mnt/archinstall/usr/lib/initcpio/hooks/encrypt
-    rm /mnt/archinstall/usr/lib/initcpio/hooks/encrypt.bak
-
-    plymouth-set-default-theme tribar -R
-
-
-    # Disable and remove systemd service
-    systemctl disable run-once.service
-    rm /etc/systemd/system/run-once.service
-    rm /bin/script.sh
-
-
-
-    systemctl daemon-reload
-
-    EOF
 
 
     echo "[*] set script rights"
-    chmod +x /etc/systemd/system/run-once.service
     chmod +x /bin/script.sh
-
+    chmod 0644 /etc/systemd/system/run-once.service
 
     echo "[*] enable startup"
     systemctl --quiet --no-warn enable run-once.service
 
-    echo "[*] whitemagic done"
     ########
     # Do something here, replace this comment with your desired action
-else
-    echo "[*] File does not contain encrypted data. Doing nothing."
-fi
 
+else
+    echo "[*] Encryption is disabled on this install processing next..."
+    echo "[*] set plymouth theme (rebuilding mkinitcpio with our encrypt script)"
+    plymouth-set-default-theme tribar -R
+fi
+###############################################################################
+echo "[*] whitemagic done"
 
 
 
