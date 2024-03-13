@@ -88,7 +88,7 @@ systemctl --quiet --no-warn daemon-reload
 if ! grep -qF '[localrepo]' /etc/pacman.conf; then
    echo "[*] tune: pacman.conf"
 
-   cp -p /root/scripts123/configs/offline_pacman.conf /etc/pacman.conf
+   cp /root/scripts123/configs/offline_pacman.conf /etc/pacman.conf
 
    # sed -i '/#\s*\[core-testing\]/i [localrepo]\nSigLevel = Optional TrustAll\nServer = file:///localrepo\n' /etc/pacman.conf
 
@@ -177,7 +177,7 @@ bash /root/scripts123/do_this_outside_chroot.sh
 
 echo "[*] making black magic inside chroot"
 cp /root/scripts123/do_this_inside_chroot.sh /mnt/archinstall/do_this_inside_chroot.sh
-chroot /mnt/archinstall bash /do_this_inside_chroot.sh
+arch-chroot /mnt/archinstall bash /do_this_inside_chroot.sh
 echo " "
 echo "[*] installer: complete"
 echo ' ------------------------------------------------------------------------'

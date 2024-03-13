@@ -142,7 +142,8 @@
         "discover",
         "packagekit-qt6",
         "plasma-integration",
-        "firefox-i18n-de"
+        "firefox-i18n-de",
+        "plymouth"
     ],
     "parallel downloads": 10,
     "profile_config": {

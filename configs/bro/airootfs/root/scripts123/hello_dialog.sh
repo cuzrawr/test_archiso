@@ -3,13 +3,23 @@
 description="
 \n
 USE KEYBOARD arrows AND tab TO NAVIGATE.\n\n
-IN NEXT MENU USE Encrypt password:  TO ENABLE DISK ENCRYPTION.\n\n
+IN NEXT MENU USE Encrypt TO ENABLE DISK ENCRYPTION.\n\n
 IN NEXT MENU JUST PRESS enter TO CONTINUE DEFAULT INSTALLATION.\n\n
 \n
 DEFAULTS CREDENTIALS:
 \n
  USER IS  username  WITH PASSWORD  123 \n
- ROOT IS  root      WITH PASSWORD  123 \n"
+ ROOT IS  root      WITH PASSWORD  123 \n
+\n
+================================================================================\n
+VERWENDEN SIE TASTATURPFEILE UND TAB ZUR NAVIGATION.\n\n
+IM NÄCHSTEN MENÜ VERWENDEN SIE VERCHLÜSSELN, UM DIE DISK-Verschlüsselung zu AKTIVIEREN.\n\n
+\n
+STANDARD-ANMELDEINFORMATIONEN:
+\n
+ BENUTZER IST BENUTZERNAME MIT PASSWORT 123 \n
+ ROOT IST root MIT PASSWORT 123 \n
+ "
 
 # Display dialog box to get user input
 dialog --title "Installation Dialog" --clear --stdout --erase-on-exit --trim --no-shadow --beep --beep-after --msgbox "$description\n\nPress OK to continue. Press ESC to cancel." 0 0
@@ -39,41 +49,77 @@ userPassword=123
 rootPassword=123
 userName=username
 
-# Function to display the input dialog
-show_input_dialog() {
-    inputDialog=$(dialog --stdout --clear --erase-on-exit --no-cancel --trim --beep --beep-after --no-shadow --stdout --title "Installation Dialog" \
-                    --form "Note: use keyboard  ARROWS and TAB  to navigate.\n\nNote: Leaving the encryption password field blank will result in a non-encrypted installation.\n\nNote: Username should not include any spaces or special characters..\n\n Please provide the necessary installation credentials: \n\n" 0 0 0 \
-                    "Encrypt password:" 1 1 "$encryptionPassword" 1 20 35 0 \
-                    "user password:" 2 1 "$userPassword" 2 20 35 0 \
-                    "root password:" 3 1 "$rootPassword" 3 20 35 0 \
-                    "Username:     " 4 1 "$userName" 4 20 35 0)
 
 
-    # Read input from dialog output
-    if [ $? -eq 0 ]; then
-        read_input "$inputDialog"
-    else
-        exit 1  # Exit if user cancels
-    fi
-}
 
-Function to read input from dialog output
-read_input() {
-    # echo "$1"
-    encryptionPassword=$(echo "$1" | awk 'NR==1{print $NF}')
-    userPassword=$(echo "$1" | awk 'NR==2{print $NF}')
-    rootPassword=$(echo "$1" | awk 'NR==3{print $NF}')
-    userName=$(echo "$1" | awk 'NR==4{print $NF}')
-}
+# Display a menu with two selectable options
+choice=$(dialog --clear --stdout --erase-on-exit --trim --no-shadow --beep --beep-after --title "Select Option" \
+--menu "USE ARROWS TO NAVIGATE AND ENTER TO SELECT\nChoose one of the following options:\n==================\nVERWENDEN SIE DIE PFEILE ZUM NAVIGIEREN UND DIE EINGABETASTE ZUM AUSWÄHLEN\n\nWählen Sie eine der folgenden Optionen:\n" 0 0 0 \
+1 "NOT ENCRYPTED (Default) | NICHT VERSCHLÜSSELT (Standard)" \
+2 "ENCRYPTED | VERSCHLÜSSELT ")
 
-# Main loop
-while true; do
-    show_input_dialog
-    # break if provided one of the field
-    if [ "$encryptionPassword$userPassword$rootPassword" != "" ]; then
-        break
-    fi
-done
+# Check the exit status of dialog
+case $? in
+  0)
+    # User selected an option
+    case $choice in
+      1)
+        #echo "You selected Option 1"
+        ;;
+      2)
+        #echo "You selected Option 2"
+        encryptionPassword=123
+        ;;
+    esac
+    ;;
+  1)
+    # User pressed Cancel or Escape
+    echo "Cancel was pressed."
+    ;;
+  255)
+    # Dialog was interrupted
+    echo "Dialog was interrupted."
+    ;;
+esac
+
+
+# # Function to display the input dialog
+# show_input_dialog() {
+#     inputDialog=$(dialog --stdout --clear --erase-on-exit --no-cancel --trim --beep --beep-after --no-shadow --stdout --title "Installation Dialog" \
+#                     --form "Note: use keyboard  ARROWS and TAB  to navigate.\n\nNote: Leaving the encryption password field blank will result in a non-encrypted installation.\n\nNote: Username should not include any spaces or special characters..\n\n Please provide the necessary installation credentials: \n\n" 0 0 0 \
+#                     "Encrypt password:" 1 1 "$encryptionPassword" 1 20 35 0 \
+#                     "user password:" 2 1 "$userPassword" 2 20 35 0 \
+#                     "root password:" 3 1 "$rootPassword" 3 20 35 0 \
+#                     "Username:     " 4 1 "$userName" 4 20 35 0)
+
+
+#     # Read input from dialog output
+#     if [ $? -eq 0 ]; then
+#         read_input "$inputDialog"
+#     else
+#         exit 1  # Exit if user cancels
+#     fi
+# }
+
+# Function to read input from dialog output
+# read_input() {
+#     # echo "$1"
+#     encryptionPassword=$(echo "$1" | awk 'NR==1{print $NF}')
+#     userPassword=$(echo "$1" | awk 'NR==2{print $NF}')
+#     rootPassword=$(echo "$1" | awk 'NR==3{print $NF}')
+#     userName=$(echo "$1" | awk 'NR==4{print $NF}')
+# }
+
+# # Main loop
+# while true; do
+#     show_input_dialog
+#     # break if provided one of the field
+#     if [ "$encryptionPassword$userPassword$rootPassword" != "" ]; then
+#         break
+#     fi
+# done
+
+
 
 # Pass input data to next script or process
 # echo "Encrp password will be: $encryptionPassword"
