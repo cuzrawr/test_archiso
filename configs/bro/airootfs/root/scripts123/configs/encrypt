@@ -184,6 +184,8 @@ EOF
                     echo "IN NEXT MENU PROVIDE YOUR NEW PASSWORD TO BOOT YOUR NEW SYSTEM"
                     echo "GEBEN SIE IM NÄCHSTEN MENÜ IHR NEUES PASSWORT EIN, UM IHR NEUES SYSTEM ZU STARTEN"
                     echo -ne "#####                     (33%)\r"
+                    sleep 2
+                    echo -ne "##########                (47%)\r"
                     sleep 3
                     echo -ne "#############             (66%)\r"
                     sleep 7
