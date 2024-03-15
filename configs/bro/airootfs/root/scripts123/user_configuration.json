@@ -113,7 +113,7 @@
         "linux-fsync-nobara-bin"
     ],
     "locale_config": {
-        "kb_layout": "de",
+        "kb_layout": "us",
         "sys_enc": "UTF-8",
         "sys_lang": "de_DE"
     },

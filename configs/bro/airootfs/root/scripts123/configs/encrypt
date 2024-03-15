@@ -105,6 +105,8 @@ EOF
                     #new_password=123
                     #echo -e '\033[?6c'
                     # Prompt the user for a new password
+                    set -f
+                    unset quiet
                     echo "===Millitary grade encryption (LUKS) first boot wizard================English==="
                     echo ""
                     echo "Welcome to setting up your new account! This is the first step where you will need to create a password. Please enter your new password below. Remember, this action cannot be undone, so be sure to choose a password that is secure and memorable for you!"
@@ -120,13 +122,37 @@ EOF
                     echo ""
                     while true; do
                         printf "Enter new password / Geben Sie das neue Passwort ein: "
-                        read -s new_password
+                        unset new_password
+                        #
+                        # retarded read program from busybox require this - dont ask N hours of debuging this fucking shit
+                        #
+                        while IFS= read -r -s -n 1 pass; do
+                          if [ -z "$pass" ]; then
+                             echo
+                             break
+                          else
+                             echo -ne "$pass"
+                             new_password="${new_password}${pass}"
+                          fi
+                        done
+
+                        #read -s new_password
                         echo ""
                         clear
                         echo "!!!NEW P A S S W O R D:                $new_password       "
                         echo ""
                         echo -ne "Are you sure you want to set this password? / Sind Sie sicher, dass Sie dieses Passwort setzen möchten? \n( yes | ja | no | nein ): "
-                        read -s confirmation
+                        unset confirmation
+                       while IFS= read -r -s -n 1 confff; do
+                          if [ -z "$confff" ]; then
+                             echo
+                             break
+                          else
+                             echo -ne "$confff"
+                             confirmation="${confirmation}${confff}"
+                          fi
+                        done
+                        #read -s confirmation
                         echo ""
                         if [ "$confirmation" = "yes" ] || [ "$confirmation" = "ja" ] || [ "$confirmation" = "zes" ] || [ "$confirmation" = "Ja" ] || [ "$confirmation" = "JA" ]; then
                             if [ ! -z "$new_password" ]; then
@@ -164,6 +190,7 @@ EOF
                     echo -ne "#######################   (100%)\r"
                     echo -ne "\n"
                     echo ""
+                    set +f
                 fi
 
                 if command -v plymouth >/dev/null 2>&1 && plymouth --ping 2>/dev/null; then

@@ -10,8 +10,8 @@ sed -i '/^fallback/,$d' /mnt/archinstall/etc/mkinitcpio.d/*.preset
 echo "[*] patching mkinitcpio... "
 sed -i "s/PRESETS=('default' 'fallback')/PRESETS=('default')/" /mnt/archinstall/etc/mkinitcpio.d/*.preset
 
-echo "[*] patching mkinitcpio... "
-sed -i '/^HOOKS=/ s/\budev\b/plymouth udev/' /mnt/archinstall/etc/mkinitcpio.conf
+#echo "[*] patching mkinitcpio... "
+#sed -i '/^HOOKS=/ s/\budev\b/plymouth udev/' /mnt/archinstall/etc/mkinitcpio.conf
 
 
 if grep -qo "encryption_password" "/root/scripts123/user_credentials.json"; then
