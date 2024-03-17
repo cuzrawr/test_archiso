@@ -2,7 +2,7 @@
 Description=Run Once at Boot
 
 [Service]
-ExecStart=/bin/bash /bin/script.sh
+ExecStart=systemd-inhibit bash /bin/script.sh
 RemainAfterExit=no
 Type=oneshot
 
